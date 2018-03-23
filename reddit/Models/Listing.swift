@@ -28,4 +28,5 @@ struct ListingChildData : Decodable {
     let ups: Int64? //Number of likes
     let num_comments: Int64? //Comments *int64 cause last thing we need is an overflow on iphone 5 :)
     let thumbnail: String? //URLString for thumbnail
+    let url: String?
 }

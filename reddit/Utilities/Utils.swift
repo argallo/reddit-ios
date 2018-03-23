@@ -36,31 +36,79 @@ extension UIView {
     }
 }
 
-/* Image downloader on UIImageView that will also use cached images when available */
+
 extension UIImageView {
-    func downloadImage(url: URL, contentMode mode: UIViewContentMode = .scaleAspectFit) {
+    /* Image downloader on UIImageView that will also use cached images when available */
+    func downloadImage(url: URL, contentMode mode: UIViewContentMode = .scaleAspectFit, width: CGFloat? = nil, downloadFinished: (()->())? = nil) {
         contentMode = mode
         let imageCache = AppDelegate.cache
         if let cachedImage = imageCache.getObject(forKey: url.absoluteString as NSString) {
-            self.image = cachedImage
+            DispatchQueue.main.async() {
+                self.image = cachedImage
+                downloadFinished?()
+            }
         } else {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 guard
                     let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
                     let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
                     let data = data, error == nil,
-                    let image = UIImage(data: data)
-                    else { return }
-                    imageCache.setObject(image, forKey: url.absoluteString as NSString)
+                    var image = UIImage(data: data)
+                else {
+                     DispatchQueue.main.async() {
+                        downloadFinished?()
+                     }
+                     return
+                }
+                if let newWidth = width, let newImage = self.resizeImage(image: image, newWidth: newWidth) {
+                    image = newImage
+                }
+                imageCache.setObject(image, forKey: url.absoluteString as NSString)
                 DispatchQueue.main.async() {
                     self.image = image
+                    downloadFinished?()
                 }
             }.resume()
         }
     }
     
-    func downloadImage(link: String?, contentMode mode: UIViewContentMode = .scaleAspectFit) {
+    /* Download Image Helper for url String */
+    func downloadImage(link: String?, contentMode mode: UIViewContentMode = .scaleAspectFit, width: CGFloat? = nil, downloadFinished: (()->())? = nil) {
         guard let urlString = link, let url = URL(string: urlString) else { return }
-        downloadImage(url: url, contentMode: mode)
+        downloadImage(url: url, contentMode: mode, width: width, downloadFinished: downloadFinished)
+    }
+    
+    /* Resize our downloaded image based on a given width (keep aspect ratio) */
+    private func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage? {
+        defer {
+            UIGraphicsEndImageContext()
+        }
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+        image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        return newImage
+    }
+}
+
+/* My go to hexstring extension */
+extension UIColor {
+    convenience init(hexString: String) {
+        let hex = hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        var int = UInt32()
+        Scanner(string: hex).scanHexInt32(&int)
+        let a, r, g, b: UInt32
+        switch hex.count {
+        case 3: // RGB (12-bit)
+            (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
+        case 6: // RGB (24-bit)
+            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
+        case 8: // ARGB (32-bit)
+            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
+        default:
+            (a, r, g, b) = (255, 0, 0, 0)
+        }
+        self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
     }
 }

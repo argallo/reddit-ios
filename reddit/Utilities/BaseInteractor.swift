@@ -11,6 +11,7 @@ import Foundation
 class BaseInteractor {
     let webService: WebService
     
+    //Dependency injection FTW
     init(webService: WebService) {
         self.webService = webService
     }

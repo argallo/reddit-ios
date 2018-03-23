@@ -30,11 +30,12 @@ class RBCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         postCardView.postCommentLabel.text = ""
         postCardView.postVoteLabel.text = ""
-        postCardView.postImageView.image = nil
         postCardView.postTitleLabel.text = ""
+        postCardView.postImageView.image = nil
     }
 }
 
+/* Public access methods */
 extension RBCollectionViewCell {
     /* Apply Post data to our subview: RBPostCardView */
     func apply(with post: ListingChildData){

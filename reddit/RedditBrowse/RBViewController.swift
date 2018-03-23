@@ -38,6 +38,7 @@ class RBViewController: UIViewController, RBViewControllerInput {
     private let size = CGSize(width: UIScreen.main.bounds.width - 20,
                             height: UIScreen.main.bounds.width * 150 / 400)
     private let pageLoadOffset = 2
+    private let navTitle = "Reddit /r/pics"
     
     enum Identifier {
         static let collectionViewCell = "collectionViewCell"
@@ -52,14 +53,21 @@ class RBViewController: UIViewController, RBViewControllerInput {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNav()
         output?.loadNewPage(initialLoad: true)
         configureCollectionView()
         self.view.addSubview(collectionView)
+        registerForPreviewing(with: self, sourceView: collectionView)
     }
 }
 
 /* Private methods */
 extension RBViewController {
+    private func configureNav() {
+        self.navigationItem.title = navTitle
+        self.navigationController?.navigationBar.tintColor = UIColor.lightGray
+    }
+    
     /* Sets up our CollectionView for scrolling through posts */
     private func configureCollectionView() {
         let layout = UICollectionViewFlowLayout()
@@ -70,7 +78,7 @@ extension RBViewController {
         collectionView.dataSource = self
         
         collectionView.register(RBCollectionViewCell.self, forCellWithReuseIdentifier: Identifier.collectionViewCell)
-        collectionView.backgroundColor = .lightGray
+        collectionView.backgroundColor = UIColor(hexString: "f6f7f8")
     }
     
     /* Reloads collection view with updated VM and does so on the main thread */
@@ -90,7 +98,6 @@ extension RBViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifier.collectionViewCell, for: indexPath) as? RBCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.backgroundColor = .white
         cell.apply(with: viewModel.posts[indexPath.row])
         return cell
     }
@@ -118,6 +125,22 @@ extension RBViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return size
     }
+}
+
+/* Peek and Pop 3D touch Previewing Delegate*/
+extension RBViewController: UIViewControllerPreviewingDelegate {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        if let indexPath = collectionView.indexPathForItem(at: location), let cellAttributes = collectionView.layoutAttributesForItem(at: indexPath),
+            let previewString = viewModel.posts[indexPath.row].url {
+            previewingContext.sourceRect = cellAttributes.frame
+            let previewVC = PostPreviewViewController(previewImage: previewString)
+            previewVC.preferredContentSize = cellAttributes.frame.size
+            return previewVC
+        }
+        return nil
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {}
 }
 
 

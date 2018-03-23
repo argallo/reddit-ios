@@ -10,6 +10,7 @@
 		E93C15FC2061FB76003B61FF /* RBPostCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93C15FB2061FB76003B61FF /* RBPostCardView.swift */; };
 		E93C15FE2061FE65003B61FF /* RBPostCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E93C15FD2061FE65003B61FF /* RBPostCardView.xib */; };
 		E93C16002064167A003B61FF /* CachingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93C15FF2064167A003B61FF /* CachingService.swift */; };
+		E93C16032064A3A5003B61FF /* PostPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93C16022064A3A5003B61FF /* PostPreviewViewController.swift */; };
 		E94970E0205F7A4500847019 /* RBCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94970DF205F7A4500847019 /* RBCollectionViewCell.swift */; };
 		E94970E72060A94900847019 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94970E62060A94900847019 /* WebService.swift */; };
 		E94970EA2060AEFA00847019 /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94970E92060AEFA00847019 /* Listing.swift */; };
@@ -46,6 +47,7 @@
 		E93C15FB2061FB76003B61FF /* RBPostCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RBPostCardView.swift; sourceTree = "<group>"; };
 		E93C15FD2061FE65003B61FF /* RBPostCardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RBPostCardView.xib; sourceTree = "<group>"; };
 		E93C15FF2064167A003B61FF /* CachingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachingService.swift; sourceTree = "<group>"; };
+		E93C16022064A3A5003B61FF /* PostPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPreviewViewController.swift; sourceTree = "<group>"; };
 		E94970DF205F7A4500847019 /* RBCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RBCollectionViewCell.swift; sourceTree = "<group>"; };
 		E94970E62060A94900847019 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		E94970E92060AEFA00847019 /* Listing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listing.swift; sourceTree = "<group>"; };
@@ -114,11 +116,12 @@
 		E94970F12060C61600847019 /* RedditBrowse */ = {
 			isa = PBXGroup;
 			children = (
-				E94970DF205F7A4500847019 /* RBCollectionViewCell.swift */,
 				E94970ED2060BC2A00847019 /* RBInteractor.swift */,
-				E98E5440205D798300717BBB /* RBViewController.swift */,
+				E94970DF205F7A4500847019 /* RBCollectionViewCell.swift */,
 				E93C15FB2061FB76003B61FF /* RBPostCardView.swift */,
 				E93C15FD2061FE65003B61FF /* RBPostCardView.xib */,
+				E98E5440205D798300717BBB /* RBViewController.swift */,
+				E93C16022064A3A5003B61FF /* PostPreviewViewController.swift */,
 			);
 			path = RedditBrowse;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E93C15FC2061FB76003B61FF /* RBPostCardView.swift in Sources */,
+				E93C16032064A3A5003B61FF /* PostPreviewViewController.swift in Sources */,
 				E98E5447205D798300717BBB /* reddit.xcdatamodeld in Sources */,
 				E98E5441205D798300717BBB /* RBViewController.swift in Sources */,
 				E93C16002064167A003B61FF /* CachingService.swift in Sources */,

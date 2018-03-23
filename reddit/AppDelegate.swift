@@ -21,7 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let rootViewController = RBViewController()
         rbInteractor.viewModelHolder = rootViewController
         rootViewController.output = rbInteractor
-        return rootViewController
+        let navController = UINavigationController(rootViewController: rootViewController)
+        return navController
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {

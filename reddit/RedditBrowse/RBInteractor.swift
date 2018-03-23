@@ -9,7 +9,7 @@
 import Foundation
 
 class RBInteractor: BaseInteractor {
-    private let baseURL = "https://www.reddit.com/r/all/.json?limit=25"
+    private let baseURL = "https://www.reddit.com/r/pics/.json?limit=25"
     weak var viewModelHolder: RBViewControllerInput!
     
     private enum EntityState {
