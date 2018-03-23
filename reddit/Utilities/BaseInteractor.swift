@@ -9,7 +9,7 @@
 import Foundation
 
 class BaseInteractor {
-    var webService: WebService
+    let webService: WebService
     
     init(webService: WebService) {
         self.webService = webService

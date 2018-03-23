@@ -8,10 +8,6 @@
 
 import Foundation
 
-protocol Models {
-    associatedtype modelType
-}
-
 /* Our web request service */
 class WebService {
     /* Generic URL Request that will be mapped into a codable object */
