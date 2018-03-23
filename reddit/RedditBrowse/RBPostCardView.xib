@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RBPostCardView" customModule="reddit" customModuleProvider="target">
+            <connections>
+                <outlet property="postCommentLabel" destination="1Og-t6-6bg" id="vQ0-Lh-Ur7"/>
+                <outlet property="postImageView" destination="XMz-Fi-rx7" id="p6E-Zm-nIm"/>
+                <outlet property="postTitleLabel" destination="RGK-wj-PHx" id="9zF-UJ-Wtx"/>
+                <outlet property="postVoteLabel" destination="O1S-WE-Zfa" id="Q7U-SP-ggQ"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="400" height="150"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XMz-Fi-rx7">
+                    <rect key="frame" x="10" y="10" width="130" height="130"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="XMz-Fi-rx7" secondAttribute="height" multiplier="1:1" id="J7l-dX-nq2"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Testing three lines and if we can go onto more Testing three lines and if we can go onto more" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RGK-wj-PHx">
+                    <rect key="frame" x="150" y="10" width="240" height="95"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="RGK-wj-PHx" secondAttribute="height" multiplier="58:23" id="YKW-rq-xla"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Votes: 2340" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1S-WE-Zfa">
+                    <rect key="frame" x="150" y="115" width="79" height="25"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comments: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Og-t6-6bg">
+                    <rect key="frame" x="312" y="115" width="78" height="25"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="1Og-t6-6bg" secondAttribute="trailing" constant="10" id="3Zf-Cl-Wgi"/>
+                <constraint firstItem="XMz-Fi-rx7" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="3f3-Np-9kj"/>
+                <constraint firstItem="O1S-WE-Zfa" firstAttribute="top" secondItem="RGK-wj-PHx" secondAttribute="bottom" constant="10" id="A0x-JW-avX"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="XMz-Fi-rx7" secondAttribute="bottom" constant="10" id="C07-rW-Yhu"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="O1S-WE-Zfa" secondAttribute="bottom" constant="10" id="DPb-gV-2g4"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="RGK-wj-PHx" secondAttribute="trailing" constant="10" id="Mof-fB-HEn"/>
+                <constraint firstItem="RGK-wj-PHx" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="VWm-Kw-MUG"/>
+                <constraint firstItem="O1S-WE-Zfa" firstAttribute="leading" secondItem="XMz-Fi-rx7" secondAttribute="trailing" constant="10" id="Zx8-hD-Mw9"/>
+                <constraint firstItem="1Og-t6-6bg" firstAttribute="top" secondItem="RGK-wj-PHx" secondAttribute="bottom" constant="10" id="a77-Ic-oOG"/>
+                <constraint firstItem="XMz-Fi-rx7" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="bVz-5t-6My"/>
+                <constraint firstItem="RGK-wj-PHx" firstAttribute="leading" secondItem="XMz-Fi-rx7" secondAttribute="trailing" constant="10" id="iW5-3i-FaK"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="1Og-t6-6bg" secondAttribute="bottom" constant="10" id="oUU-1Q-8OP"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-415" y="-23"/>
+        </view>
+    </objects>
+</document>
