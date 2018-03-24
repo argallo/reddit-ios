@@ -11,6 +11,7 @@ import Foundation
 class CachingService<K: AnyObject, V: AnyObject>: NSCache<AnyObject, AnyObject> {
     let maxCachedObjects: Int //Todo: change this to bytes 
     var keyList: [K]
+    var keyListIndex = 0 //keeping track of next index to remove changes key removal from O(N) to O(1)
     
     init(cacheLimit: Int = 200) {
         maxCachedObjects = cacheLimit
@@ -19,11 +20,14 @@ class CachingService<K: AnyObject, V: AnyObject>: NSCache<AnyObject, AnyObject> 
         keyList.reserveCapacity(maxCachedObjects)
     }
     
-    override func setObject(_ obj: AnyObject, forKey key: AnyObject) {
+    func setObject(_ obj: V, forKey key: K) {
         if keyList.count == maxCachedObjects {
-            self.removeObject(forKey: keyList.remove(at: 0))
+            removeObject(forKey: keyList[keyListIndex])
+            keyList[keyListIndex] = key
+            keyListIndex = keyListIndex + 1 == keyList.count ? 0 : keyListIndex + 1
+        } else {
+            keyList.append(key)
         }
-        keyList.append(key as! K)
         super.setObject(obj, forKey: key)
     }
     
